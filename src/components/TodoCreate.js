@@ -1,27 +1,29 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import TodosContext from '../context/TodoContext';
 
-const TodoCreate = ({ createTodo }) => {
-    const [title, setTitle] = useState("");
+const TodoCreate = () => {
+    const [todo, setTodo] = useState('');
+    const { createTodo } = useContext(TodosContext);
 
     const handleChange = (e) => {
-        setTitle(e.target.value);
+        setTodo(e.target.value);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // chặn reload lại trang
-        createTodo(title);
-        setTitle("");
+        createTodo(todo);
+        setTodo('');
     };
 
     return (
         <form onSubmit={handleSubmit} className="todo-create">
             <input
                 type="text"
-                name="title"
-                id="title"
+                name="todo"
+                id="todo"
                 placeholder="Enter a todo"
-                value={title}
+                value={todo}
                 onChange={handleChange}
             />
         </form>

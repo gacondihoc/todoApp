@@ -1,7 +1,9 @@
 import TodoShow from "./TodoShow";
+import TodosContext from '../context/TodoContext';
+import { useContext } from 'react';
 
-const TodoList = ({ todos, removeTodo, changeTodo }) => {
-    console.log("ddax chayj vaof gias :", changeTodo)
+const TodoList = () => {
+    const { todos } = useContext(TodosContext);
 
     //thay vì vẽ map trong return tổng thì tạo 1 function để vẽ map ở ngoài rồi chỉ việc ghép lại trong return tổng
     const renderedTodos = todos.map((todo) => {
@@ -9,8 +11,6 @@ const TodoList = ({ todos, removeTodo, changeTodo }) => {
             <TodoShow
                 key={todo.id}
                 todo={todo}
-                removeTodo={removeTodo}
-                changeTodo={changeTodo}
             />
             // todoshow là component vẽ 1 phần tử
         )

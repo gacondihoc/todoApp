@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import TodosContext from '../context/TodoContext';
 import DeleteIcon from "../delete.svg";
 import EditIcon from "../edit.svg";
 import TodoEdit from "./TodoEdit";
 
-const TodoShow = ({ todo, removeTodo, changeTodo }) => {
-
+const TodoShow = ({ todo }) => {
     const [showEdit, setShowEdit] = useState(false);
+    const { removeTodo, changeTodo } = useContext(TodosContext);
+
 
     const handleDelete = (e) => {
         removeTodo(todo.id);
@@ -33,7 +35,7 @@ const TodoShow = ({ todo, removeTodo, changeTodo }) => {
     }
     return (
         <li className="todo" onDoubleClick={handleDoubleClick}>
-            <p className={todo.completed && 'completed'}>{todo.title}</p>
+            <p className={todo.completed ? 'completed' : 'open'}>{todo.title}</p>
 
             <div className="actions">
                 <button onClick={handleDelete}>
